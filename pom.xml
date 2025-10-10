@@ -29,44 +29,44 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
       	<configuration>
-	  <includeEmptyDirs>true</includeEmptyDirs>
-	</configuration>
-	<dependencies>
-	  <dependency>
-	    <groupId>org.apache.maven.shared</groupId>
-	    <artifactId>maven-filtering</artifactId>
-	    <version>${maven.plugin.filtering.version}</version>
-	  </dependency>
-	</dependencies>
-        <executions>
-          <!-- files needed for execution -->
-          <execution>
-            <id>copy-resources-for-execution</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-	      <delimiters>
-	        <delimiter>${*}</delimiter> <!-- to keep the default behavior --> 
-	        <delimiter>@*@</delimiter>  <!-- to add Ant-like tokens style --> 
-	      </delimiters>
-              <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-	      <includeEmptyDirs>true</includeEmptyDirs>
-              <resources>
+          <includeEmptyDirs>true</includeEmptyDirs>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-filtering</artifactId>
+            <version>${maven.plugin.filtering.version}</version>
+          </dependency>
+        </dependencies>
+          <executions>
+            <!-- files needed for execution -->
+            <execution>
+              <id>copy-resources-for-execution</id>
+              <phase>process-resources</phase>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <configuration>
+                <delimiters>
+                  <delimiter>${*}</delimiter> <!-- to keep the default behavior --> 
+                  <delimiter>@*@</delimiter>  <!-- to add Ant-like tokens style --> 
+                </delimiters>
+                <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+	              <includeEmptyDirs>true</includeEmptyDirs>
+                <resources>
+                  <resource>
+                    <directory>src/main/resources</directory>
+                    <includes>
+                            <include>revision-mitobo.txt</include>
+                    </includes>
+                    <filtering>true</filtering>
+                  </resource>
                 <resource>
-	          <directory>src/main/resources</directory>
-	          <includes>
-                    <include>revision-mitobo.txt</include>
-	          </includes>
-	          <filtering>true</filtering>
-                </resource>
-                <resource>
-	          <directory>src/main/resources</directory>
-	          <excludes>
-                    <exclude>revision-mitobo.txt</exclude>
-	          </excludes>
-	          <filtering>false</filtering>
+	                <directory>src/main/resources</directory>
+                  <excludes>
+                          <exclude>revision-mitobo.txt</exclude>
+                  </excludes>
+                  <filtering>false</filtering>
                 </resource>
               </resources>
             </configuration>
@@ -79,19 +79,19 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-	      <delimiters>
-	        <delimiter>${*}</delimiter> <!-- to keep the default behavior --> 
-	        <delimiter>@*@</delimiter>  <!-- to add Ant-like tokens style --> 
-	      </delimiters>
-	      <includeEmptyDirs>true</includeEmptyDirs>
+              <delimiters>
+                <delimiter>${*}</delimiter> <!-- to keep the default behavior --> 
+                <delimiter>@*@</delimiter>  <!-- to add Ant-like tokens style --> 
+              </delimiters>
+              <includeEmptyDirs>true</includeEmptyDirs>
               <outputDirectory>${project.build.outputDirectory}</outputDirectory>
               <resources>
                 <resource>
-	          <directory>src/main/java</directory>
-	          <filtering>true</filtering>
-	          <includes>
+                  <directory>src/main/java</directory>
+                  <filtering>true</filtering>
+                  <includes>
                     <include>**/*.java</include>
-	          </includes>
+                  </includes>
                 </resource>
               </resources>
             </configuration>
@@ -110,39 +110,39 @@
             <goals>
               <goal>copy-dependencies</goal>
             </goals>
-	    <configuration>
-	      <outputDirectory>
-		${project.build.directory}/dependency-jars
-	      </outputDirectory>
-	    </configuration>
+            <configuration>
+              <outputDirectory>
+          ${project.build.directory}/dependency-jars
+              </outputDirectory>
+            </configuration>
           </execution>
-	  <execution>
-	    <id>unpack</id>
-	    <phase>compile</phase>
-	    <goals>
-	      <goal>unpack</goal>
-	    </goals>
-	    <configuration>
-	      <artifactItems>
-		<artifactItem>
-		  <groupId>de.unihalle.informatik.MiToBo.native</groupId>
-		  <artifactId>mitobo-native-${native.libdir}</artifactId>
-		  <version>1.2.1</version>
-		  <type>jar</type>
-		  <overWrite>true</overWrite>
-		  <outputDirectory>target/natives/${native.libdir}</outputDirectory>
-		</artifactItem>
-	      </artifactItems>
-	    </configuration>
-	  </execution>
+          <execution>
+            <id>unpack</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>de.unihalle.informatik.MiToBo.native</groupId>
+                  <artifactId>mitobo-native-${native.libdir}</artifactId>
+                  <version>1.2.1</version>
+                  <type>jar</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>target/natives/${native.libdir}</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 
       <plugin>
-	<groupId>org.codehaus.mojo</groupId>
-	<artifactId>build-helper-maven-plugin</artifactId>
-	<version>${maven.plugin.buildhelper.version}</version>
-	<executions>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>${maven.plugin.buildhelper.version}</version>
+        <executions>
           <execution>
             <id>add-source</id>
             <phase>generate-sources</phase>
@@ -156,93 +156,93 @@
               </sources>
             </configuration>
           </execution>
-	</executions>
+      	</executions>
       </plugin>
 
       <plugin>
         <groupId>org.jvnet.jaxb2.maven2</groupId>
-	<artifactId>maven-jaxb2-plugin</artifactId>
-	<version>${maven.plugin.jaxb2.version}</version>
+        <artifactId>maven-jaxb2-plugin</artifactId>
+        <version>${maven.plugin.jaxb2.version}</version>
         <executions>
           <execution>
             <id>xjc-rsml</id>
             <phase>generate-sources</phase>
-	    <goals>
-	      <goal>generate</goal>
-	    </goals>
+            <goals>
+              <goal>generate</goal>
+            </goals>
             <configuration>
-	      <schemas>
-		<schema>
-		  <fileset>
-		    <!-- Defaults to schemaDirectory. -->
-		    <directory>src/main/resources/schemas/rsml</directory>
-                    <!-- Defaults to schemaIncludes. -->
-		    <includes>
-		      <include>*.xsd</include>
-		    </includes>
-		  </fileset>
-		</schema>
-	      </schemas>
-	      <generateDirectory>${project.build.directory}/generated-sources/xjc/rsml</generateDirectory>
-	      <generatePackage>de.unihalle.informatik.MiToBo.xsd.rsml</generatePackage>
-	      <writeCode>true</writeCode>
-	      <noFileHeader>false</noFileHeader>
-	      <removeOldOutput>false</removeOldOutput>
-	      <enableIntrospection>true</enableIntrospection>
+              <schemas>
+                <schema>
+                  <fileset>
+                    <!-- Defaults to schemaDirectory. -->
+                    <directory>src/main/resources/schemas/rsml</directory>
+                                <!-- Defaults to schemaIncludes. -->
+                    <includes>
+                      <include>*.xsd</include>
+                    </includes>
+                  </fileset>
+                </schema>
+              </schemas>
+              <generateDirectory>${project.build.directory}/generated-sources/xjc/rsml</generateDirectory>
+              <generatePackage>de.unihalle.informatik.MiToBo.xsd.rsml</generatePackage>
+              <writeCode>true</writeCode>
+              <noFileHeader>false</noFileHeader>
+              <removeOldOutput>false</removeOldOutput>
+              <enableIntrospection>true</enableIntrospection>
             </configuration>
           </execution>
           <execution>
             <id>xjc-config</id>
             <phase>generate-sources</phase>
-	    <goals>
-	      <goal>generate</goal>
-	    </goals>
+            <goals>
+              <goal>generate</goal>
+            </goals>
             <configuration>
-	      <schemas>
+              <schemas>
                 <schema>
-		  <fileset>
-		    <!-- Defaults to schemaDirectory. -->
-		    <directory>src/main/resources/schemas/config</directory>
-                    <!-- Defaults to schemaIncludes. -->
-		    <includes>
-		      <include>*.xsd</include>
-		    </includes>
-		  </fileset>
-		</schema>
-	      </schemas>
-	      <generateDirectory>${project.build.directory}/generated-sources/xjc/config</generateDirectory>
-	      <generatePackage>de.unihalle.informatik.MiToBo.xsd.config</generatePackage>
-	      <writeCode>true</writeCode>
-	      <noFileHeader>false</noFileHeader>
-	      <removeOldOutput>false</removeOldOutput>
-	      <enableIntrospection>true</enableIntrospection>
+                  <fileset>
+                    <!-- Defaults to schemaDirectory. -->
+                    <directory>src/main/resources/schemas/config</directory>
+                                <!-- Defaults to schemaIncludes. -->
+                    <includes>
+                      <include>*.xsd</include>
+                    </includes>
+                  </fileset>
+                </schema>
+              </schemas>
+              <generateDirectory>${project.build.directory}/generated-sources/xjc/config</generateDirectory>
+              <generatePackage>de.unihalle.informatik.MiToBo.xsd.config</generatePackage>
+              <writeCode>true</writeCode>
+              <noFileHeader>false</noFileHeader>
+              <removeOldOutput>false</removeOldOutput>
+              <enableIntrospection>true</enableIntrospection>
             </configuration>
           </execution>
         </executions>
       </plugin>
 
       <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-compiler-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
       </plugin>
 
       <plugin>
-	<!-- run annotation processing -->
-	<groupId>org.bsc.maven</groupId>
-	<artifactId>maven-processor-plugin</artifactId>
+        <!-- run annotation processing -->
+        <groupId>org.bsc.maven</groupId>
+        <artifactId>maven-processor-plugin</artifactId>
       </plugin>
 
       <!-- configure native resources for unit testing -->
       <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-surefire-plugin</artifactId>
-	<configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
           <excludes>
             <exclude>**/TestMTBLevelsetFunctionPDE.java</exclude>
           </excludes>
-	  <forkMode>once</forkMode>
-	  <argLine>-Djava.library.path=./target/natives/${native.libdir}</argLine>
-	</configuration>
+          <forkMode>once</forkMode>
+          <argLine>-Djava.library.path=./target/natives/${native.libdir}</argLine>
+        </configuration>
       </plugin>
 
       <plugin>
@@ -251,35 +251,35 @@
       </plugin>
       
       <plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-site-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
       </plugin>
 
       <plugin>
-	<!-- package binaries and sources into zip files;
-	     Attention: here we use our own assembly descriptors! -->
-	<artifactId>maven-assembly-plugin</artifactId>
-	<configuration>
-	  <descriptors>
-	    <descriptor>src/main/assembly/mitobo-bin.xml</descriptor>
-	    <descriptor>src/main/assembly/mitobo-src.xml</descriptor>
-	  </descriptors>
-	</configuration>
-	<executions>
-	  <execution>
-	    <id>assembly-distribution-Id</id>
-	    <phase>package</phase>
-	    <goals>
-	      <goal>single</goal>
-	    </goals>
-	  </execution>
-	</executions>
+        <!-- package binaries and sources into zip files;
+            Attention: here we use our own assembly descriptors! -->
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/mitobo-bin.xml</descriptor>
+            <descriptor>src/main/assembly/mitobo-src.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <id>assembly-distribution-Id</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>
-	<!-- package javadocs -->
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-javadoc-plugin</artifactId>
+        <!-- package javadocs -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
       </plugin>
 
       <!-- configuration to run MiToBo Grappa via mvn exec:exec -->
@@ -293,23 +293,22 @@
             </goals>
           </execution>
         </executions>
-	<configuration>
+        <configuration>
           <executable>java</executable>
-	  <classpathScope>runtime</classpathScope>
+          <classpathScope>runtime</classpathScope>
           <arguments>
-	    <argument>-classpath</argument>
+            <argument>-classpath</argument>
             <classpath/>
-	    <argument>-Xms2048m</argument>
-	    <argument>-Xmx2048m</argument>
-	    <argument>-Djava.library.path=target/natives/${native.libdir}</argument>
-	    <argument>-Dalida.oprunner.level=standard</argument>
-	    <argument>-Dalida.versionprovider_class=de.unihalle.informatik.MiToBo.core.operator.MTBVersionProviderReleaseFile</argument>
+            <argument>-Xms2048m</argument>
+            <argument>-Xmx2048m</argument>
+            <argument>-Djava.library.path=target/natives/${native.libdir}</argument>
+            <argument>-Dalida.oprunner.level=standard</argument>
+            <argument>-Dalida.versionprovider_class=de.unihalle.informatik.MiToBo.core.operator.MTBVersionProviderReleaseFile</argument>
             <argument>de.unihalle.informatik.Alida.tools.ALDGrappaRunner</argument>
           </arguments>
         </configuration>
-      </plugin>
+       </plugin>
     </plugins>
-
   </build>
 
   <repositories>
@@ -425,10 +424,10 @@
       <artifactId>alida</artifactId>
       <scope>compile</scope>
       <exclusions>
-	<exclusion>
-	  <groupId>org.slf4j</groupId>
-	  <artifactId>slf4j-log4j12</artifactId>
-	</exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <!-- Runtime dependencies -->
