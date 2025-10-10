@@ -120,6 +120,7 @@ import de.unihalle.informatik.Alida.datatypes.ALDFileString;
 import de.unihalle.informatik.Alida.exceptions.ALDOperatorException;
 import de.unihalle.informatik.Alida.exceptions.ALDOperatorException.OperatorExceptionType;
 import de.unihalle.informatik.Alida.exceptions.ALDProcessingDAGException;
+import de.unihalle.informatik.Alida.helpers.ALDFilePathManipulator;
 import de.unihalle.informatik.Alida.operator.ALDOperator;
 import de.unihalle.informatik.Alida.annotations.ALDAOperator;
 import de.unihalle.informatik.Alida.annotations.ALDAOperator.ExecutionMode;
@@ -548,7 +549,8 @@ public class ImageReaderMTB extends MTBOperator implements StatusReporter {
 
 		img.setCurrentSliceIndex(0);
 	
-		img.setTitle(this.omemeta.getImageName(imageIdx));
+//		img.setTitle(this.omemeta.getImageName(imageIdx));
+		img.setTitle(extractImageTitleFromFilename(this.getFileName()));
 		
 		img.setXML(this.omexml);
 		
@@ -750,15 +752,16 @@ public class ImageReaderMTB extends MTBOperator implements StatusReporter {
 			}
 		}
 		
-		String title = this.omemeta.getImageName(imageIdx);
-		if (title == null || title.equals(""))
-			title = this.omemeta.getImageID(imageIdx);
-		if (title == null || title.equals("")) {
-			title = this.fileName.getFileName();
-			
-			if (this.getImageCount() > 1)
-				title += " IMG" + imageIdx;
-		}
+//		String title = this.omemeta.getImageName(imageIdx);
+//		if (title == null || title.equals(""))
+//			title = this.omemeta.getImageID(imageIdx);
+//		if (title == null || title.equals("")) {
+//			title = this.fileName.getFileName();
+//			
+//			if (this.getImageCount() > 1)
+//				title += " IMG" + imageIdx;
+//		}
+		String title = extractImageTitleFromFilename(this.getFileName());
 		
 //		if (indexed) {
 //			
@@ -826,8 +829,16 @@ public class ImageReaderMTB extends MTBOperator implements StatusReporter {
 	}
 	
 	
-	
-	
+	/**
+	 * Extracts image title from filename by removing path elements.
+	 * @param filename	Name of file.
+	 * @return	Extracted title string.
+	 */
+	private static String extractImageTitleFromFilename(String filename) {
+		String titleString = ALDFilePathManipulator.removeLeadingDirectories(filename);
+		return titleString;
+	}
+		
 	
 	/**
 	 * Set resulting image
