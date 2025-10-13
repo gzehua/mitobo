@@ -131,6 +131,7 @@ import de.unihalle.informatik.Alida.annotations.Parameter;
 import de.unihalle.informatik.MiToBo.core.datatypes.images.MTBImage;
 import de.unihalle.informatik.MiToBo.core.datatypes.images.MTBImageRGB;
 import de.unihalle.informatik.MiToBo.core.datatypes.images.MTBImage.MTBImageType;
+import de.unihalle.informatik.MiToBo.core.datatypes.images.MTBImageByte;
 import de.unihalle.informatik.MiToBo.core.operator.MTBOperator;
 import de.unihalle.informatik.MiToBo.io.tools.ImageIOUtils;
 
@@ -372,9 +373,9 @@ public class ImageReaderMTB extends MTBOperator implements StatusReporter {
 		int pixeltype = this.reader.getPixelType();
 		int samplesperpixel = this.reader.getRGBChannelCount();
 		
-		if ((pixeltype == FormatTools.UINT8 && samplesperpixel != 3) || 
-									 pixeltype == FormatTools.UINT16 ||
-									 pixeltype == FormatTools.FLOAT) {
+		if (   (pixeltype == FormatTools.UINT8 && samplesperpixel != 3) 
+				||  pixeltype == FormatTools.UINT16
+				||  pixeltype == FormatTools.FLOAT) {
 			MTBImage image = MTBImage.createMTBImage(this.readImagePlus(imageIdx));
 			image.setLocation(this.fileName.getFileName());
 			return image;
@@ -391,6 +392,11 @@ public class ImageReaderMTB extends MTBOperator implements StatusReporter {
 				mtbtype = MTBImageType.MTB_INT;
 				nBytes = 4;
 		}
+//		else if (pixeltype == FormatTools.INT8) {
+//			mtbtype = MTBImageType.MTB_BYTE;
+//			nBytes = 1;
+//			signed = true;
+//		}
 		else if (pixeltype == FormatTools.DOUBLE) {
 				mtbtype = MTBImageType.MTB_DOUBLE;
 				nBytes = 8;
@@ -488,6 +494,19 @@ public class ImageReaderMTB extends MTBOperator implements StatusReporter {
 							img.putValueInt(x, y, data[n][y*sizeX + x]);
 				}				
 			}
+			// input data of type 'int8'
+//			else if (mtbtype == MTBImageType.MTB_BYTE) {
+//				img.setCurrentSliceIndex(i);
+//
+//				int[][] data = AWTImageTools.getInts(bimg);
+//				MTBImageByte byteimg = (MTBImageByte)img;
+//
+//				for (int y = 0; y < sizeY; y++) {
+//					for (int x = 0; x < sizeX; x++) {
+//						byteimg.putValueInt(x, y, (data[0][y*sizeX + x]) < 128? (data[0][y*sizeX + x]) : 128-(data[0][y*sizeX + x]));
+//					}
+//				}
+//			}
 			else if (mtbtype == MTBImageType.MTB_DOUBLE) {
 				
 				double[][] data = AWTImageTools.getDoubles(bimg);
