@@ -11,6 +11,15 @@ The format of the file is based on a template from [Keep a Changelog](http://kee
 ### Removed
 ### Fixed
 
+## [2.5] - 2025-10-14
+Birgit Moeller - <birgit.moeller@informatik.uni-halle.de>
+- Released MiToBo 2.5
+### Added
+- PlastidNucleiDistanceAnalyzer2D: released measurer for analysis of plastid/nuclei interactions
+### Changed
+- bump to SciJava 43.0.0
+- ImageReaderMTB: set image title to file name instead of image name for consistency with ImageJ/Fiji and since image name in metadata is not necessarily unique, but might be the same for different files
+
 ## [2.4] - 2025-03-14
 Birgit Moeller - <birgit.moeller@informatik.uni-halle.de>
 - Released MiToBo 2.4
